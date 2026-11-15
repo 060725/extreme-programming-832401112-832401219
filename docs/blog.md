@@ -16,7 +16,7 @@ The project is a front-end / back-end separated web application supporting
 
 ## 1. Project address
 
-- GitHub repository: <!-- TODO: paste GitHub repo URL -->
+- GitHub repository: https://github.com/JorgeHUANG7/-
 - Front-end entry: `frontend/index.html`
 - Back-end service: <!-- TODO: paste back-end access URL, or http://localhost:8888 -->
 - Cloud deployment (optional): <!-- TODO: paste deployed URL, or write "not deployed" -->
