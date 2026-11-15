@@ -1,0 +1,30 @@
+server:
+  port: ${SERVER_PORT:8888}
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:phonebook}?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:123456}
+
+mybatis-plus:
+  mapper-locations: classpath*:com/example/form/**/mapper/**Mapper.xml
+  typeAliasesPackage: com.example.files.**.entity
+  global-config:
+    db-config:
+      table-underline: true
+
+# Aliyun OSS is used only for optional avatar upload.
+# Leave these empty if you do not need the avatar feature; other features keep working.
+ali:
+  oss:
+    endpoint: ${ALI_OSS_ENDPOINT:}
+    bucketName: ${ALI_OSS_BUCKET:}
+    accessKeyId: ${ALI_OSS_ACCESS_KEY_ID:}
+    accessKeySecret: ${ALI_OSS_ACCESS_KEY_SECRET:}
+    address: ${ALI_OSS_ADDRESS:}
