@@ -33,6 +33,12 @@ supports **bookmarking contacts**, **multiple contact methods** and
 | 黄志远 | `JorgeHUANG7` | 7 |
 | 王少杰 | `060725` | 7（4 个功能 + 3 个文档 / 截图 / 视频提交，不含合并提交） |
 
+> 协作方式：黄志远创建团队仓库，王少杰 **Fork** 该仓库后通过分支 + Pull Request 提交，
+> 合并记录见 PR #1–#5。
+>
+> - 团队仓库（主）：<https://github.com/JorgeHUANG7/extreme-programming-832401112-832401219>
+> - 王少杰的 Fork：<https://github.com/060725/extreme-programming-832401112-832401219>
+
 黄志远（`JorgeHUANG7`）的提交记录：
 
 ![Commit history of 黄志远](images/commits-jorge.png)
