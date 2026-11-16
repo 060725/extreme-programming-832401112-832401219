@@ -2,7 +2,7 @@
 | --- | --- |
 | Course for This Assignment | EE308FZ Software Engineering (FZU–MU) |
 | Team Name | 832401112-832401219 |
-| Assignment Requirements | 实现通讯录的收藏联系人、多联系方式与 Excel 导入导出；作业链接：【待填写：作业要求链接】 |
+| Assignment Requirements | [Extreme Programming (Deadline: November 17, 2026 23:59)](https://bbs.csdn.net/topics/620593436)——实现通讯录的收藏联系人、多联系方式与 Excel 导入导出 |
 | Objectives of This Assignment | Experience the full Extreme Programming development process: module division, Git collaboration, iterative development, testing and delivery of an address book with bookmark, multiple contact methods and Excel import/export |
 | Other References | [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) · [EasyExcel](https://github.com/alibaba/easyexcel) · [Spring Boot Docs](https://docs.spring.io/spring-boot/docs/2.3.12.RELEASE/reference/html/) · [MyBatis-Plus](https://baomidou.com/) |
 
@@ -18,6 +18,8 @@ supports **bookmarking contacts**, **multiple contact methods** and
 ## 1. Project address
 
 - GitHub repository: <https://github.com/JorgeHUANG7/extreme-programming-832401112-832401219>
+- Assignment requirements: <https://bbs.csdn.net/topics/620593436>
+- Course community: `2601_FZU-MU_SE`
 - Code style guide: [docs/code-style.md](https://github.com/JorgeHUANG7/extreme-programming-832401112-832401219/blob/main/docs/code-style.md)
 - Deployment guide: [docs/deploy.md](https://github.com/JorgeHUANG7/extreme-programming-832401112-832401219/blob/main/docs/deploy.md)
 - Front-end entry: `frontend/index.html`
