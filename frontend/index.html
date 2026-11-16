@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>电话簿</title>
     <link rel="stylesheet" href="css/index.css"/>
 </head>
@@ -9,19 +10,26 @@
 
 <div class="container">
     <h1>电话簿</h1>
-    <button id="addButton" onclick="showModal('add')">新增</button>
-    <button class="collect2" onclick="window.location.href='collect.html'">我的书签</button>
-    <button id="download" onclick="download()">导出</button>
-    <button id="importButton">导入</button>
+
+    <div class="toolbar">
+        <button id="addButton" onclick="showModal('add')">新增</button>
+        <button class="collect2" onclick="window.location.href='collect.html'">★ 我的收藏</button>
+        <button id="download" onclick="download()">导出 Excel</button>
+        <button id="importButton">导入 Excel</button>
+        <input type="text" id="searchInput" placeholder="搜索姓名..." autocomplete="off">
+    </div>
 
     <input type="file" id="excelFileInput" style="display: none;" accept=".xlsx, .xls">
 
     <table id="phonebookTable">
         <thead>
         <tr>
+            <th class="col-star">收藏</th>
             <th>姓名</th>
             <th>手机号码</th>
-            <th>操作</th>
+            <th>邮箱</th>
+            <th>地址</th>
+            <th class="col-action">操作</th>
         </tr>
         </thead>
         <tbody id="phonebookTbody">
@@ -33,22 +41,20 @@
 <div id="modal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
+        <h2 id="modalTitle">新增联系人</h2>
 
-        <!-- 新增的上传头像部分 -->
         <div class="form-group">
             <label for="imageInput">上传头像:</label>
             <input type="file" id="imageInput" name="image" accept="image/*">
         </div>
-        <img id="previewImage" src="" alt="预览图片"
-             style="display:none; max-width: 100%; height: auto; border-radius: 50%; margin-top: 10px;">
-        <p id="responseMessage"></p>
+        <img id="previewImage" src="" alt="预览图片">
 
         <div class="form-group">
             <label for="username">姓名:</label>
             <input type="text" id="username" name="username">
         </div>
         <div class="form-group">
-            <label for="phone">电话号码:</label>
+            <label for="phone">手机号码:</label>
             <input type="text" id="phone" name="phone">
         </div>
         <div class="form-group">

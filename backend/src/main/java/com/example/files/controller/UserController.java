@@ -8,6 +8,7 @@ import com.example.files.service.FilesService;
 import com.example.files.service.UserService;
 import com.example.files.utils.ExcelExportUtil;
 import com.example.files.utils.UserListener;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import java.io.IOException;
 import java.util.List;
 
 
+@Slf4j
 @RestController
 public class UserController {
     @Autowired
@@ -95,12 +97,19 @@ public class UserController {
     //导入
     @PostMapping("/importExcel")
     public String importExcel(@RequestParam("file") MultipartFile file) {
+        if (file == null || file.isEmpty()) {
+            return "error:上传的文件为空";
+        }
         try {
+            userListener.reset();
             EasyExcel.read(file.getInputStream(), User.class, userListener).sheet().doRead();
-            return "ok";
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            int success = userListener.getSuccessCount();
+            int skipped = userListener.getSkippedCount();
+            log.info("Excel import finished: {} imported, {} skipped", success, skipped);
+            return "ok:" + success + ":" + skipped;
+        } catch (Exception e) {
+            log.error("Excel import failed", e);
+            return "error:文件解析失败，请检查表头是否与导出模板一致";
         }
     }
 

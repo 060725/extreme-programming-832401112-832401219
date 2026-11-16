@@ -13,7 +13,8 @@ spring:
     password: ${DB_PASSWORD:123456}
 
 mybatis-plus:
-  mapper-locations: classpath*:com/example/form/**/mapper/**Mapper.xml
+  # Mapper XML files live under com/example/files/mapper/ in this project.
+  mapper-locations: classpath*:com/example/files/**/*Mapper.xml
   typeAliasesPackage: com.example.files.**.entity
   global-config:
     db-config:
