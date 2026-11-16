@@ -30,20 +30,20 @@ supports **bookmarking contacts**, **multiple contact methods** and
 
 | Contributor | GitHub account | Commits |
 | --- | --- | --- |
-| 黄志远 | `JorgeHUANG7` | 7 |
-| 王少杰 | `060725` | 7（4 个功能 + 3 个文档 / 截图 / 视频提交，不含合并提交） |
+| 黄致远 | `JorgeHUANG7` | 7 |
+| 王少杰 | `060725` | 10（4 个功能 / 构建 + 6 个文档，不含合并提交；截至 2026-11-16） |
 
-> 协作方式：黄志远创建团队仓库，王少杰 **Fork** 该仓库后通过分支 + Pull Request 提交，
-> 合并记录见 PR #1–#5。
+> 协作方式：黄致远创建团队仓库，王少杰 **Fork** 该仓库后通过分支 + Pull Request 提交，
+> 合并记录见 PR #1–#6。
 >
 > - 团队仓库（主）：<https://github.com/JorgeHUANG7/extreme-programming-832401112-832401219>
 > - 王少杰的 Fork：<https://github.com/060725/extreme-programming-832401112-832401219>
 
-黄志远（`JorgeHUANG7`）的提交记录：
+黄致远（`JorgeHUANG7`）的提交记录：
 
-![Commit history of 黄志远](images/commits-jorge.png)
+![Commit history of 黄致远](images/commits-jorge.png)
 
-王少杰（`060725`）在 PR #1 中的 4 个功能与文档提交；此外还有 3 个文档提交，用于加入演示截图、博客插图和视频链接：
+王少杰（`060725`）在 PR #1 中的 4 个功能与文档提交；此外还有 6 个文档提交，用于加入演示截图、博客插图、视频链接和作业链接：
 
 ![Commit history of 王少杰](images/commits-060725.png)
 
@@ -214,7 +214,7 @@ Video script suggestion:
 
 | Name | Student ID | Work |
 | --- | --- | --- |
-| 黄志远 | 832401112 | Back-end architecture, database design, Excel export, Docker deployment, blog review |
+| 黄致远 | 832401112 | Back-end architecture, database design, Excel export, Docker deployment, blog review |
 | 王少杰 | 832401219 | Front-end pages and interactions, bookmark UI, search, Excel import validation, code style document, blog writing |
 
 > 请按实际分工修改，确保与 Git 提交内容一致。
@@ -223,14 +223,14 @@ Video script suggestion:
 
 | Name | Contribution |
 | --- | --- |
-| 黄志远 | 50% |
+| 黄致远 | 50% |
 | 王少杰 | 50% |
 
 > 两人合计必须为 100%，并与提交记录、分工表保持一致。
 
 ## 8. Difficulties encountered and solutions
 
-### 8.1 黄志远
+### 8.1 黄致远
 
 - **Problem:** Excel import inserted the whole batch at once, so one row without a
   name or phone made the entire import fail with an unreadable error.
@@ -261,7 +261,7 @@ Video script suggestion:
 
 ## 9. PSP tables
 
-### PSP table of 黄志远
+### PSP table of 黄致远
 
 | Modules | Task Description | Estimated time (h) | Actual time (h) |
 | --- | --- | --- | --- |

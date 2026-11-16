@@ -5,7 +5,7 @@
 
 - 课程：**EE308FZ Software Engineering (FZU–MU)**
 - 队名：**832401112-832401219**
-- 成员：**黄志远（832401112）**、**王少杰（832401219）**
+- 成员：**黄致远（832401112）**、**王少杰（832401219）**
 - 仓库：<https://github.com/JorgeHUANG7/extreme-programming-832401112-832401219>
 - 代码规范：[docs/code-style.md](docs/code-style.md)
 - 部署指南：[docs/deploy.md](docs/deploy.md)
