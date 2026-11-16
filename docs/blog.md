@@ -29,14 +29,13 @@ supports **bookmarking contacts**, **multiple contact methods** and
 | Contributor | GitHub account | Commits |
 | --- | --- | --- |
 | 黄志远 | `JorgeHUANG7` | 7 |
-| 王少杰 | `060725` | 5（PR #1 的 4 个 + 1 个截图 / 文档提交） |
+| 王少杰 | `060725` | 7（4 个功能 + 3 个文档 / 截图 / 视频提交，不含合并提交） |
 
 黄志远（`JorgeHUANG7`）的提交记录：
 
 ![Commit history of 黄志远](images/commits-jorge.png)
 
-王少杰（`060725`）在 PR #1 中的 4 个功能与文档提交；此外还有 1 个提交用于加入
-本节的演示截图和博客插图：
+王少杰（`060725`）在 PR #1 中的 4 个功能与文档提交；此外还有 3 个文档提交，用于加入演示截图、博客插图和视频链接：
 
 ![Commit history of 王少杰](images/commits-060725.png)
 
