@@ -186,7 +186,9 @@ Browser (HTML/CSS/JS) --HTTP/JSON--> Spring Boot (Controller/Service/Mapper)
 
 ### 5.4 Complete running video
 
-演示视频（26 秒，1280×720，H.264）：【待填写：上传到 Bilibili / GitHub Release 后的公开链接】
+演示视频（26 秒，1280×720，H.264）：<https://github.com/JorgeHUANG7/extreme-programming-832401112-832401219/releases/download/v1.0.0/demo.mp4>
+
+下载页：<https://github.com/JorgeHUANG7/extreme-programming-832401112-832401219/releases/tag/v1.0.0>
 
 视频内容依次为：打开联系人列表 → 新增王五（填写 5 种联系方式）→ 点击 ☆ 收藏（变 ★ 且整行高亮）
 → 搜索“李” → 进入“我的收藏”页 → 导出 Excel → 重新导入并提示“成功 3 条，跳过 0 条”。
