@@ -6,6 +6,7 @@ import com.alibaba.excel.annotation.write.style.ColumnWidth;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -80,6 +81,7 @@ public class User implements Serializable {
     private Integer collect;
 
     @ExcelIgnore
+    @JsonIgnore
     @TableField(exist = false)
     private MultipartFile file;
 
