@@ -29,13 +29,16 @@ supports **bookmarking contacts**, **multiple contact methods** and
 | Contributor | GitHub account | Commits |
 | --- | --- | --- |
 | 黄志远 | `JorgeHUANG7` | 7 |
-| 王少杰 | `060725` | 4 |
+| 王少杰 | `060725` | 5（PR #1 的 4 个 + 1 个截图 / 文档提交） |
 
-> 提交记录截图放在 `docs/images/` 下，建议命名 `commits-<account>.png`。
+黄志远（`JorgeHUANG7`）的提交记录：
 
-【待填写：成员1提交记录截图，文件名 `commits-member1.png`】
+![Commit history of 黄志远](images/commits-jorge.png)
 
-【待填写：成员2提交记录截图，文件名 `commits-member2.png`】
+王少杰（`060725`）在 PR #1 中的 4 个功能与文档提交；此外还有 1 个提交用于加入
+本节的演示截图和博客插图：
+
+![Commit history of 王少杰](images/commits-060725.png)
 
 ## 3. Module division and architecture
 
@@ -149,23 +152,44 @@ Browser (HTML/CSS/JS) --HTTP/JSON--> Spring Boot (Controller/Service/Mapper)
 
 ### 5.1 Bookmark contacts
 
-![Bookmarked row highlight](images/ui-index.png)
+联系人列表（收藏行黄色高亮，★ 表示已收藏）：
 
-![My collection page](images/ui-collect.png)
+![Contact list with bookmarked row](images/list.png)
 
-【待填写：收藏 / 取消收藏的操作 GIF，文件名建议 `bookmark.gif`】
+收藏状态切换：
+
+![Bookmarked row highlight](images/bookmark.png)
+
+“我的收藏”页面：
+
+![My collection page](images/collect.png)
 
 ### 5.2 Multiple contact methods
 
-【待填写：新增/编辑多条联系方式的截图，建议 `multi-contact.png`】
+新增联系人时可以填写手机号码、家庭电话、电子邮箱、社交媒体、真实地址：
+
+![Add contact with multiple contact methods](images/multi-contact.png)
+
+姓名实时搜索：
+
+![Search by name](images/search.png)
 
 ### 5.3 Excel export and import
 
-【待填写：导出文件内容截图 + 导入成功提示截图，建议 `excel-export.png`、`excel-import.png`】
+导出成功后下载的 `my_contacts.xlsx`（每个联系人一行、每个字段一列）：
+
+![Exported Excel file](images/excel-export.png)
+
+将同一个文件重新导入，前端提示导入成功条数：
+
+![Import result](images/excel-import.png)
 
 ### 5.4 Complete running video
 
-【待填写：完整演示视频链接（Bilibili / 阿里云盘 / GitHub Release 附件）】
+演示视频（26 秒，1280×720，H.264）：【待填写：上传到 Bilibili / GitHub Release 后的公开链接】
+
+视频内容依次为：打开联系人列表 → 新增王五（填写 5 种联系方式）→ 点击 ☆ 收藏（变 ★ 且整行高亮）
+→ 搜索“李” → 进入“我的收藏”页 → 导出 Excel → 重新导入并提示“成功 3 条，跳过 0 条”。
 
 Video script suggestion:
 
