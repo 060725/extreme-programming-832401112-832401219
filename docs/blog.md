@@ -2,288 +2,240 @@
 | --- | --- |
 | Course for This Assignment | EE308FZ Software Engineering (FZU–MU) |
 | Team Name | 832401112-832401219 |
-| Assignment Requirements | [Extreme Programming (Deadline: November 17, 2026 23:59)](https://bbs.csdn.net/topics/620593436)——实现通讯录的收藏联系人、多联系方式与 Excel 导入导出 |
-| Objectives of This Assignment | Experience the full Extreme Programming development process: module division, Git collaboration, iterative development, testing and delivery of an address book with bookmark, multiple contact methods and Excel import/export |
-| Other References | [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) · [EasyExcel](https://github.com/alibaba/easyexcel) · [Spring Boot Docs](https://docs.spring.io/spring-boot/docs/2.3.12.RELEASE/reference/html/) · [MyBatis-Plus](https://baomidou.com/) |
+| Assignment Requirements | [Extreme Programming（截止 2026-11-17 23:59）](https://bbs.csdn.net/topics/620593436)——实现通讯录的收藏联系人、多联系方式与 Excel 导入导出 |
+| Objectives of This Assignment | 完整体验极限编程流程：模块划分、Git 协作、迭代开发、测试与交付，并掌握前后端分离应用的实现方法 |
+| Other References | [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) · [EasyExcel](https://github.com/alibaba/easyexcel) · [Spring Boot 2.3.x Docs](https://docs.spring.io/spring-boot/docs/2.3.12.RELEASE/reference/html/) · [MyBatis-Plus](https://baomidou.com/) |
 
 [TOC]
 
-# Extreme Programming — Address Book
+# Extreme Programming — 通讯录（Address Book）
 
-This blog records the design, implementation and delivery of the address book
-assignment. The project is a front-end / back-end separated web application that
-supports **bookmarking contacts**, **multiple contact methods** and
-**Excel import / export**.
+本文记录了通讯录作业的设计、实现与交付过程。项目采用前后端分离架构，
+支持**收藏联系人**、**单个联系人的多种联系方式**以及 **Excel 导入 / 导出**，
+并在此基础上提供收藏星标、收藏行高亮、按姓名搜索与响应式页面样式。
 
-## 1. Project address
+## 1. 项目地址
 
-- GitHub repository: <https://github.com/JorgeHUANG7/extreme-programming-832401112-832401219>
-- Assignment requirements: <https://bbs.csdn.net/topics/620593436>
-- Course community: `2601_FZU-MU_SE`
-- Code style guide: [docs/code-style.md](https://github.com/JorgeHUANG7/extreme-programming-832401112-832401219/blob/main/docs/code-style.md)
-- Deployment guide: [docs/deploy.md](https://github.com/JorgeHUANG7/extreme-programming-832401112-832401219/blob/main/docs/deploy.md)
-- Front-end entry: `frontend/index.html`
-- Back-end service: `http://<server-ip>:8888`
-- Cloud application (public URL): 【待填写：部署后的公网地址，例如 http://1.2.3.4:8080/index.html】
+- GitHub 仓库：<https://github.com/JorgeHUANG7/extreme-programming-832401112-832401219>
+- 作业要求：<https://bbs.csdn.net/topics/620593436>
+- 课程社区：`2601_FZU-MU_SE`
+- 代码规范：[docs/code-style.md](https://github.com/JorgeHUANG7/extreme-programming-832401112-832401219/blob/main/docs/code-style.md)
+- 部署指南：[docs/deploy.md](https://github.com/JorgeHUANG7/extreme-programming-832401112-832401219/blob/main/docs/deploy.md)
+- 前端入口：`frontend/index.html`
+- 后端服务：本地为 `http://localhost:8888`；使用 Docker / 云服务器部署时为 `http://<服务器IP>:8888`
+- 云端部署：**本次未进行公网部署**（云端部署为可选附加项）。仓库已提供 `docker-compose.yml` 与部署文档，可在华为云 / 阿里云等服务器上一键复现。
 
-## 2. GitHub submission log
+## 2. GitHub 提交记录
 
 | Contributor | GitHub account | Commits |
 | --- | --- | --- |
 | 黄致远 | `JorgeHUANG7` | 7 |
-| 王少杰 | `060725` | 10（4 个功能 / 构建 + 6 个文档，不含合并提交；截至 2026-11-16） |
+| 王少杰 | `060725` | 10（4 个功能 / 构建提交 + 6 个文档提交，不含合并提交；截至 2026-11-16） |
 
-> 协作方式：黄致远创建团队仓库，王少杰 **Fork** 该仓库后通过分支 + Pull Request 提交，
-> 合并记录见 PR #1–#6。
+> 协作方式：黄致远创建团队仓库，王少杰 **Fork** 该仓库后，通过 `feature/*` 分支 + Pull Request 提交，合并记录见 PR #1–#7。
 >
 > - 团队仓库（主）：<https://github.com/JorgeHUANG7/extreme-programming-832401112-832401219>
 > - 王少杰的 Fork：<https://github.com/060725/extreme-programming-832401112-832401219>
 
 黄致远（`JorgeHUANG7`）的提交记录：
 
-![Commit history of 黄致远](images/commits-jorge.png)
+![黄致远的提交记录](images/commits-jorge.png)
 
-王少杰（`060725`）在 PR #1 中的 4 个功能与文档提交；此外还有 6 个文档提交，用于加入演示截图、博客插图、视频链接和作业链接：
+王少杰（`060725`）在 PR #1 中的 4 个功能与构建提交；此外还有 6 个文档提交，用于补充演示截图、博客插图、视频链接和作业链接：
 
-![Commit history of 王少杰](images/commits-060725.png)
+![王少杰的提交记录](images/commits-060725.png)
 
-## 3. Module division and architecture
+## 3. 模块划分与系统架构
 
-Before coding we split the system into four modules so that both members could
-work in parallel without blocking each other:
+编码之前，我们将系统拆分为四个模块，使两名成员能够并行开发、互不阻塞：
 
-| Module | Responsibility | Main files |
+| 模块 | 职责 | 主要文件 |
 | --- | --- | --- |
-| Front end | Pages, interactions, request encapsulation, Excel upload/download | `frontend/*.html`, `frontend/js/*`, `frontend/css/*` |
-| Back end | REST API, validation, bookmark logic, Excel parsing/export | `backend/src/main/java/.../controller`, `service`, `utils` |
-| Database | Schema, defaults, sample data | `database/schema.sql` |
-| Delivery | Docker Compose, deployment, documentation, blog | `docker-compose.yml`, `docs/*` |
+| 前端 | 页面、交互、请求封装、Excel 上传与下载 | `frontend/*.html`、`frontend/js/*`、`frontend/css/*` |
+| 后端 | REST 接口、参数校验、收藏逻辑、Excel 解析与导出 | `backend/src/main/java/.../controller`、`service`、`utils` |
+| 数据库 | 建表、默认值、示例数据 | `database/schema.sql` |
+| 交付 | Docker Compose、部署、文档与博客 | `docker-compose.yml`、`docs/*` |
 
-Architecture:
+系统架构如下：
 
 ```
-Browser (HTML/CSS/JS) --HTTP/JSON--> Spring Boot (Controller/Service/Mapper)
-                                              |
-                                        MySQL 8 (user table)
+浏览器 (HTML/CSS/JS) --HTTP/JSON--> Spring Boot (Controller/Service/Mapper)
+                                             |
+                                       MySQL 8 (user 表)
 ```
 
-- The front end is pure static files, so it can be opened directly or served by Nginx.
-- The back end exposes RESTful APIs and uses MyBatis-Plus for CRUD.
-- EasyExcel handles both import and export with the same `User` entity, so the
-  exported file can be imported back without editing headers.
+- 前端为纯静态文件，可直接打开，也可由 Nginx 托管。
+- 后端提供 RESTful API，数据访问使用 MyBatis-Plus。
+- 导入与导出共用同一个 `User` 实体及其注解，因此系统导出的文件可以**原样重新导入**，无需手动修改表头。
 
-## 4. Description of functional implementation ideas
+## 4. 功能实现思路
 
-### 4.1 Bookmark contacts
+### 4.1 收藏联系人
 
-![Fig.1 The `collect` column](images/db-collect.png)
+![图 1：user 表中的 collect 字段](images/db-collect.png)
 
-- **Database:** a `collect` column (`INT NOT NULL DEFAULT 1`). `1` = not bookmarked, `2` = bookmarked.
-- **Back end:** `PUT /toggleBookmark` updates the status; `GET /collectList` returns only bookmarked contacts.
-- **Front end:**
-  - every row has a ★ / ☆ button; clicking it toggles the status and reloads the list;
-  - bookmarked rows are highlighted in yellow (`tr.collected`), so they are visible at a glance;
-  - `collect.html` lists only bookmarked contacts and supports searching inside the collection.
+- **数据库：** 增加 `collect` 字段（`INT NOT NULL DEFAULT 1`），`1` 表示未收藏，`2` 表示已收藏。
+- **后端：** `PUT /toggleBookmark` 切换收藏状态；`GET /collectList` 仅返回已收藏的联系人。
+- **前端：**
+  - 每一行提供 ★ / ☆ 按钮，点击即切换收藏状态并刷新列表；
+  - 已收藏的行以黄色高亮（`tr.collected`），一目了然；
+  - `collect.html` 只展示已收藏的联系人，并支持在收藏集合内搜索。
 
-![Fig.6 Bookmarked row highlight](images/ui-index.png)
+![图 2：收藏行高亮效果](images/ui-index.png)
 
-### 4.2 Multiple contact methods
+### 4.2 多联系方式
 
-![Fig.2 Contact-method columns](images/3.3-db-elements.png)
+![图 3：多联系方式相关的表字段](images/3.3-db-elements.png)
 
-- **Database:** `phone` (mobile), `phone1` (home phone), `email`, `socialmedia`,
-  `address`, `image` (avatar URL).
-- **Front end:** the add/edit modal contains one input per contact method, plus an
-  avatar picker with instant preview.
-- **Back end:** all fields are returned by `/list`; `POST /uploadImage` stores the
-  avatar in Aliyun OSS and returns its URL (optional feature).
-- **List view:** name, mobile, email and address are shown directly in the table,
-  so different contact methods are visible without opening the edit dialog.
+- **数据库：** 在原有 `username`、`phone` 基础上扩展 `phone1`（家庭电话）、`email`、`socialmedia`、`address`、`image`（头像 URL）。
+- **前端：** 新增 / 编辑弹窗中为每种联系方式提供独立输入框，并提供头像选择与即时预览。
+- **后端：** `/list` 返回全部字段；`POST /uploadImage` 将头像上传至阿里云 OSS 并返回 URL（可选功能）。
+- **列表展示：** 表格直接显示姓名、手机号码、邮箱与地址，无需打开弹窗即可浏览主要联系方式。
 
-![Fig.3 Multi-contact form](images/3.3-multi-contact-frontend.png)
+![图 4：多联系方式编辑弹窗](images/3.3-multi-contact-frontend.png)
 
-### 4.3 Search and page style
+### 4.3 搜索与页面样式
 
-- The toolbar has a search box; input is debounced by 300 ms and calls
-  `GET /list?name=...`, so filtering happens on the server and stays correct for
-  large data sets.
-- The collection page filters the already-loaded collection locally, which keeps
-  switching fast.
-- The layout uses a card container, a unified toolbar, hover feedback and a
-  responsive rule for narrow screens (`@media (max-width: 640px)`).
+- 工具栏提供搜索框，输入经 300ms 防抖后调用 `GET /list?name=...`，由服务端完成模糊过滤，数据量大时依然正确。
+- 收藏页在已加载的收藏集合内本地过滤，切换更快。
+- 页面采用卡片式容器、统一工具栏与 hover 反馈，并通过 `@media (max-width: 640px)` 适配窄屏。
 
-### 4.4 Import and export
+### 4.4 导入与导出
 
-**Export**
+**导出**
 
-![Fig.4 Export button](images/3.4-export.png)
+![图 5：导出按钮](images/3.4-export.png)
 
-- The front end calls `GET /export`, receives a blob and triggers a download named
-  `my_contacts.xlsx`.
-- The back end uses `ExcelExportUtil` (EasyExcel) to write **one row per contact**
-  and **one column per field**: `用户名 | 手机号码 | 家庭电话 | 邮箱地址 | 社交媒体 | 真实地址`.
+- 前端调用 `GET /export`，接收二进制流后触发下载，文件名为 `my_contacts.xlsx`。
+- 后端使用 `ExcelExportUtil`（EasyExcel）写出：**每个联系人一行、每个字段一列**：
+  `用户名 | 手机号码 | 家庭电话 | 邮箱地址 | 社交媒体 | 真实地址`。
 
-**Import**
+**导入**
 
-![Fig.5 Import button](images/3.4-import.png)
+![图 6：导入按钮](images/3.4-import.png)
 
-- The front end opens a file picker and posts the file as `multipart/form-data` to
-  `POST /importExcel`.
-- The back end reads rows with EasyExcel and `UserListener`, then inserts them in
-  batches of 100.
-- Validation rules:
-  - rows whose `用户名` or `手机号码` is blank are **skipped** instead of failing the
-    whole import;
-  - `collect` defaults to `1` for imported contacts;
-  - the API returns `ok:<imported>:<skipped>` and the front end shows
-    “导入完成：成功 N 条，跳过 M 条”;
-  - parse errors return `error:<reason>` and the front end shows a readable message.
-- Because the export and import share the same entity annotations, a file exported
-  by the system can be imported back directly.
+- 前端打开文件选择框，以 `multipart/form-data` 提交到 `POST /importExcel`。
+- 后端使用 EasyExcel + `UserListener` 读取数据，并按每 100 条批量入库。
+- 校验规则：
+  - `用户名` 或 `手机号码` 为空的行会被**跳过**，而不是导致整批导入失败；
+  - 导入的联系人 `collect` 默认为 `1`；
+  - 接口返回 `ok:<成功数>:<跳过数>`，前端提示“导入完成：成功 N 条，跳过 M 条”；
+  - 解析错误返回 `error:<原因>`，前端展示可读的错误信息。
+- 由于导入导出共用同一实体的注解，系统导出的文件可直接重新导入。
 
-### 4.5 Deployment
+### 4.5 部署
 
-- `docker-compose.yml` starts three containers: MySQL 8, the Spring Boot back end
-  and an Nginx container serving `frontend/`.
-- `backend/Dockerfile` builds with JDK 11 (Spring Boot 2.3.x does not build on
-  JDK 17+) and runs on a JRE 11 image.
-- `frontend/js/config.js` automatically points `API_BASE` to
-  `http://<current-host>:8888` when the page is not opened from `localhost`, so the
-  same build works locally and on a cloud server.
-- Deployment steps are documented in `docs/deploy.md` (security group, Docker
-  installation, startup, verification and update).
+- `docker-compose.yml` 一次启动三个容器：MySQL 8、Spring Boot 后端、托管 `frontend/` 的 Nginx。
+- `backend/Dockerfile` 使用 JDK 11 构建与运行（Spring Boot 2.3.x 不支持在 JDK 17+ 上编译）。
+- `frontend/js/config.js` 会根据 `location.hostname` 自动推导 `API_BASE`：本地开发使用 `localhost:8888`，部署后自动指向 `http://<当前主机>:8888`，因此同一份构建可同时用于本地与云端。
+- 部署步骤（安全组、Docker 安装、启动、验证与更新）见 `docs/deploy.md`。
 
-## 5. Program screenshots and running video
+## 5. 程序截图与运行视频
 
-> 截图和视频需在真实运行的应用上录制，建议分辨率 1280×720 以上。
-
-### 5.1 Bookmark contacts
+### 5.1 收藏联系人
 
 联系人列表（收藏行黄色高亮，★ 表示已收藏）：
 
-![Contact list with bookmarked row](images/list.png)
+![图 7：联系人列表](images/list.png)
 
 收藏状态切换：
 
-![Bookmarked row highlight](images/bookmark.png)
+![图 8：收藏状态切换](images/bookmark.png)
 
 “我的收藏”页面：
 
-![My collection page](images/collect.png)
+![图 9：我的收藏页面](images/collect.png)
 
-### 5.2 Multiple contact methods
+### 5.2 多联系方式
 
-新增联系人时可以填写手机号码、家庭电话、电子邮箱、社交媒体、真实地址：
+新增联系人时可填写手机号码、家庭电话、电子邮箱、社交媒体与真实地址：
 
-![Add contact with multiple contact methods](images/multi-contact.png)
+![图 10：多联系方式新增](images/multi-contact.png)
 
-姓名实时搜索：
+按姓名实时搜索：
 
-![Search by name](images/search.png)
+![图 11：姓名搜索](images/search.png)
 
-### 5.3 Excel export and import
+### 5.3 Excel 导出与导入
 
 导出成功后下载的 `my_contacts.xlsx`（每个联系人一行、每个字段一列）：
 
-![Exported Excel file](images/excel-export.png)
+![图 12：导出的 Excel 文件](images/excel-export.png)
 
-将同一个文件重新导入，前端提示导入成功条数：
+将同一文件重新导入，前端提示成功条数：
 
-![Import result](images/excel-import.png)
+![图 13：导入结果](images/excel-import.png)
 
-### 5.4 Complete running video
+### 5.4 完整运行视频
 
 演示视频（26 秒，1280×720，H.264）：<https://github.com/JorgeHUANG7/extreme-programming-832401112-832401219/releases/download/v1.0.0/demo.mp4>
 
 下载页：<https://github.com/JorgeHUANG7/extreme-programming-832401112-832401219/releases/tag/v1.0.0>
 
-视频内容依次为：打开联系人列表 → 新增王五（填写 5 种联系方式）→ 点击 ☆ 收藏（变 ★ 且整行高亮）
-→ 搜索“李” → 进入“我的收藏”页 → 导出 Excel → 重新导入并提示“成功 3 条，跳过 0 条”。
+视频依次演示：打开联系人列表 → 新增联系人（填写 5 种联系方式）→ 点击 ☆ 收藏（变为 ★ 且整行高亮）→ 按姓名搜索 → 进入“我的收藏”页 → 导出 Excel → 重新导入并提示“成功 3 条，跳过 0 条”。
 
-Video script suggestion:
-
-1. Start the application and open the contact list;
-2. Add a contact with mobile, home phone, email, social media and address;
-3. Bookmark it and show the yellow highlight and the collection page;
-4. Search by name;
-5. Export to Excel and open the downloaded file;
-6. Modify a row, import it back, show the “成功 N 条” message;
-7. Show the database table (`SELECT * FROM user;`) to prove persistence.
-
-## 6. Division of labor among team members
+## 6. 团队成员分工
 
 | Name | Student ID | Work |
 | --- | --- | --- |
-| 黄致远 | 832401112 | Back-end architecture, database design, Excel export, Docker deployment, blog review |
-| 王少杰 | 832401219 | Front-end pages and interactions, bookmark UI, search, Excel import validation, code style document, blog writing |
+| 黄致远 | 832401112 | 后端架构、数据库设计、Excel 导出、Docker 部署、博客审阅 |
+| 王少杰 | 832401219 | 前端页面与交互、收藏界面、搜索、Excel 导入校验、代码规范文档、博客撰写 |
 
-> 请按实际分工修改，确保与 Git 提交内容一致。
-
-## 7. Contribution ratio
+## 7. 成员贡献比例
 
 | Name | Contribution |
 | --- | --- |
 | 黄致远 | 50% |
 | 王少杰 | 50% |
 
-> 两人合计必须为 100%，并与提交记录、分工表保持一致。
-
-## 8. Difficulties encountered and solutions
+## 8. 协作中遇到的困难与解决
 
 ### 8.1 黄致远
 
-- **Problem:** Excel import inserted the whole batch at once, so one row without a
-  name or phone made the entire import fail with an unreadable error.
-- **Solution:** added row-level validation in `UserListener`, batched writes every
-  100 rows, and returned `ok:<imported>:<skipped>` / `error:<reason>` so the front
-  end can show a meaningful result.
-- **Problem:** MyBatis-Plus mapper XML path pointed to a non-existent package
-  (`com.example.form`), which would silently skip mapper XML files.
-- **Solution:** corrected `mapper-locations` to
-  `classpath*:com/example/files/**/*Mapper.xml`.
-- **Problem:** after importing `schema.sql` on Windows, Chinese characters in the
-  database became `????`, because the MySQL client used the system code page
-  instead of `utf8mb4`.
-- **Solution:** import the schema with
-  `mysql --default-character-set=utf8mb4 -u root -p < database/schema.sql`, and
-  verified the returned JSON bytes are valid UTF-8.
+- **问题：** Excel 导入最初整批一次性入库，只要有一行缺少姓名或手机号，整次导入就会失败，且错误信息不可读。
+- **解决：** 在 `UserListener` 中增加按行校验，改为每 100 条批量写入，并返回 `ok:<成功数>:<跳过数>` / `error:<原因>`，前端得以展示有意义的导入结果。
+- **问题：** MyBatis-Plus 的 mapper XML 路径指向了不存在的包（`com.example.form`），会导致 mapper XML 被静默忽略。
+- **解决：** 将 `mapper-locations` 修正为 `classpath*:com/example/files/**/*Mapper.xml`。
+- **问题：** 在 Windows 下导入 `schema.sql` 后，数据库中的中文变成 `????`，原因是 MySQL 客户端使用了系统代码页而非 `utf8mb4`。
+- **解决：** 使用 `mysql --default-character-set=utf8mb4 -u root -p < database/schema.sql` 导入，并确认返回的 JSON 字节为合法的 UTF-8。
 
 ### 8.2 王少杰
 
-- **Problem:** the bookmark interaction was only a button label change, so
-  bookmarked contacts were not visually obvious.
-- **Solution:** replaced it with ★/☆ icons, added a `collected` row highlight and a
-  dedicated collection page.
-- **Problem:** when the page was opened from a cloud server, `API_BASE` still
-  pointed to `localhost`, so every request failed.
-- **Solution:** `config.js` now derives `API_BASE` from `location.hostname` and only
-  falls back to `localhost:8888` for local development.
+- **问题：** 最初的收藏交互只改变按钮文字，已收藏的联系人不明显。
+- **解决：** 改用 ★ / ☆ 图标，增加 `collected` 行高亮以及独立的收藏页面。
+- **问题：** 页面部署到云服务器后，`API_BASE` 仍指向 `localhost`，导致所有请求失败。
+- **解决：** `config.js` 改为根据 `location.hostname` 推导 `API_BASE`，仅在本地开发时回退到 `localhost:8888`。
 
-## 9. PSP tables
+## 9. PSP 表
 
-### PSP table of 黄致远
+### 9.1 黄致远的 PSP 表
 
 | Modules | Task Description | Estimated time (h) | Actual time (h) |
 | --- | --- | --- | --- |
-| Requirement analysis | Split modules and define the REST API | 3 | 4 |
-| Preparation | Learn EasyExcel and MyBatis-Plus | 4 | 5 |
-| Back-end development | CRUD, bookmark, import/export | 16 | 18 |
-| Database development | Schema, defaults, sample data | 4 | 4 |
-| Deployment | Docker Compose and cloud server | 5 | 6 |
-| Testing and debugging | API tests and bug fixes | 7 | 8 |
+| Requirement analysis | 拆分模块并定义 REST 接口 | 3 | 4 |
+| Preparation | 学习 EasyExcel 与 MyBatis-Plus | 4 | 5 |
+| Back-end development | CRUD、收藏、导入导出 | 16 | 18 |
+| Database development | 建表、默认值与示例数据 | 4 | 4 |
+| Deployment | Docker Compose 与云服务器 | 5 | 6 |
+| Testing and debugging | 接口测试与缺陷修复 | 7 | 8 |
 | **Total** | | **39** | **45** |
 
-### PSP table of 王少杰
+### 9.2 王少杰的 PSP 表
 
 | Modules | Task Description | Estimated time (h) | Actual time (h) |
 | --- | --- | --- | --- |
-| Requirement analysis | UI flow and interaction design | 3 | 3 |
-| Preparation | Learn Fetch API and page layout | 4 | 4 |
-| Front-end development | List, modal, bookmark, search | 16 | 18 |
-| Integration | Connect front end to REST API | 5 | 6 |
-| Documentation | Code style guide and blog | 4 | 5 |
-| Testing and debugging | Browser compatibility and edge cases | 6 | 7 |
+| Requirement analysis | UI 流程与交互设计 | 3 | 3 |
+| Preparation | 学习 Fetch API 与页面布局 | 4 | 4 |
+| Front-end development | 列表、弹窗、收藏、搜索 | 16 | 18 |
+| Integration | 联调前端与 REST 接口 | 5 | 6 |
+| Documentation | 代码规范与博客 | 4 | 5 |
+| Testing and debugging | 浏览器兼容与边界情况 | 6 | 7 |
 | **Total** | | **38** | **43** |
 
-> Hours are taken from the team working log; adjust them if your own records differ.
+## 10. 小结
 
+本次作业完整走通了极限编程的协作流程：先划分模块、约定代码规范与提交信息，再通过
+Fork + 分支 + Pull Request 并行开发，最终以 `v1.0.0` Release 交付。项目实现了收藏联系人、
+多联系方式与 Excel 导入导出三项核心功能，并额外补充了搜索、收藏高亮与响应式样式。
+在协作过程中，我们体会到**接口先行、职责清晰**对并行开发的重要性，也通过解决编码、
+mapper 路径与跨域等问题加深了对前后端分离应用的理解。
