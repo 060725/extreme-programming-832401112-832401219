@@ -10,7 +10,7 @@
 - 代码规范：[docs/code-style.md](docs/code-style.md)
 - 部署指南：[docs/deploy.md](docs/deploy.md)
 - 作业博客：[docs/blog.md](docs/blog.md)
-- 公网应用：**<!-- TODO: 部署后填写公网地址，例如 http://1.2.3.4:8080/index.html -->**
+- 云端部署：本次未进行公网部署（可选附加项；仓库已提供 `docker-compose.yml` 与部署指南，可一键复现）
 
 ## 功能
 
